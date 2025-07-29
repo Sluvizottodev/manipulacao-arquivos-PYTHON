@@ -1,0 +1,116 @@
+# Resumo: Manipulação de Arquivos em Python
+
+## Modos de Abertura de Arquivo
+
+* `'r'` : leitura (read)
+* `'w'` : escrita (write) — sobrescreve o arquivo
+* `'a'` : acrescentar (append)
+* `'x'` : cria novo arquivo, erro se já existir
+* `'b'` : modo binário (ex: 'rb', 'wb')
+* `'t'` : modo texto (padrão)
+
+### Exemplo:
+
+```python
+with open('arquivo.txt', 'r', encoding='utf-8') as f:
+    conteudo = f.read()
+```
+
+## Métodos de Leitura
+
+* `read()`: lê o conteúdo inteiro do arquivo como uma única string.
+* `readline()`: lê apenas uma linha por vez.
+* `readlines()`: lê todas as linhas e retorna como uma lista de strings.
+
+```python
+with open('arquivo.txt', 'r', encoding='utf-8') as f:
+    print(f.read())         # Tudo de uma vez
+    f.seek(0)
+    print(f.readline())     # Apenas a primeira linha
+    f.seek(0)
+    print(f.readlines())    # Lista com todas as linhas
+```
+
+---
+
+## Arquivos CSV
+
+### Leitura:
+
+```python
+import csv
+
+with open('dados.csv', 'r', newline='', encoding='utf-8') as f:
+    leitor = csv.reader(f)
+    for linha in leitor:
+        print(linha)
+```
+
+### Escrita:
+
+```python
+import csv
+
+dados = [
+    ['Nome', 'Idade'],
+    ['Ana', 28],
+    ['Bruno', 30]
+]
+
+with open('dados.csv', 'w', newline='', encoding='utf-8') as f:
+    escritor = csv.writer(f)
+    escritor.writerows(dados)
+```
+
+---
+
+## Arquivos JSON
+
+### Escrita:
+
+```python
+import json
+
+dados = {'nome': 'Carlos', 'idade': 25}
+
+with open('dados.json', 'w', encoding='utf-8') as f:
+    json.dump(dados, f, ensure_ascii=False, indent=4)
+```
+
+### Leitura:
+
+```python
+import json
+
+with open('dados.json', 'r', encoding='utf-8') as f:
+    dados = json.load(f)
+    print(dados['nome'])
+```
+
+---
+
+## Arquivos TXT
+
+### Escrita:
+
+```python
+texto = ['Linha 1', 'Linha 2']
+
+with open('arquivo.txt', 'w', encoding='utf-8') as f:
+    for linha in texto:
+        f.write(linha + '\n')
+```
+
+### Leitura:
+
+```python
+with open('arquivo.txt', 'r', encoding='utf-8') as f:
+    print(f.read())  # Lê todo o conteúdo como string
+
+with open('arquivo.txt', 'r', encoding='utf-8') as f:
+    print(f.readline())  # Lê apenas uma linha
+
+with open('arquivo.txt', 'r', encoding='utf-8') as f:
+    for linha in f.readlines():
+        print(linha.strip())
+```
