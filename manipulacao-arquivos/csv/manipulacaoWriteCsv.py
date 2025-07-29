@@ -1,7 +1,7 @@
 import csv
 ## write rescreve, apaga se já tiver algo, recria do 0
 #writerow
-with open("filmes.csv", "w", newlinw = '', encoding = "utf-8") as arquivo:
+with open("filmes.csv", "w", newline = '', encoding = "utf-8") as arquivo:
     escritor = csv.write(arquivo)
     escritor.writerow(["Missão impossível 7", 2025, "Ação"])
     escritor.wtriterow(["Matrix", 1999, "Ficação científica"])
