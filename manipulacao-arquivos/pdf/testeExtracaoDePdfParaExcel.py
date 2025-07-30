@@ -4,6 +4,7 @@ import re
 from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter
 
+## Código feito com auxilio de IA para chegar a resultado desejado 
 path_pdf = r"C:\Users\User\Downloads\EXTRATO DE DÉBITOS COMPLETO.pdf"
 dados = []
 
@@ -52,9 +53,9 @@ with pdfplumber.open(path_pdf) as pdf:
 
                 texto_debitos = "\n".join(bloco)
                 padrao = re.compile(
-                    r"(\d{7}) - ([^\n]+)\n"            # código + nome parcial
+                    r"(\d{7}) - ([^\n]+)\n"
                     r"(\d+º Parcela) (\d{2}/\d{2}/\d{4}) .*? R\$ ([\d.,]+) R\$ ([\d.,]+)\n"
-                    r"([^\n]+)?",                      # linha complementar opcional
+                    r"([^\n]+)?",
                     re.MULTILINE
                 )
 
@@ -76,7 +77,6 @@ with pdfplumber.open(path_pdf) as pdf:
                         "Nome do Aluno": nome_completo,
                         "Parcela": parcela,
                         "Vencimento": vencimento_str,
-                        # a coluna "Dias de Atraso" vai receber fórmula depois
                         "Dias de Atraso": None,
                         "Valor Original": valor_original,
                         "Valor Atualizado": valor_atual,
